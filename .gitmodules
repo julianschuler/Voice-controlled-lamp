@@ -1,0 +1,3 @@
+[submodule "julius"]
+	path = julius
+	url = https://github.com/julius-speech/julius
