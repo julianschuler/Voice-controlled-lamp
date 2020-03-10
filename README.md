@@ -1,6 +1,7 @@
 # Voice controlled lamp
 A voice controlled lamp using the [continuous speech recognition engine julius](https://github.com/julius-speech/julius) and a Raspberry Pi.
-Note: This project is still in the test and setup progress, thus not fully functional yet.
+
+Note: This project is still in developement, thus not fully functional yet.
 
 
 ## Hardware requirements
@@ -17,7 +18,7 @@ components needed for testing, will be replaced in the future:
 
 
 ## Wiring
-Use the female jumper cables and the bradboard to connect the anode of the LED through a 1kΩ resistor to pin BCM 27 (physical pin 13) and its cathode to ground.
+Use the female jumper cables and the breadboard to connect the anode of the LED through a 1kΩ resistor to pin BCM 27 (physical pin 13) and its cathode to ground.
 
 
 ## Installation
@@ -54,14 +55,12 @@ pip install setuptools
 pip install pyjulius
 ```
 
-Finally, start julius, switch to another terminal (Ctrl-Alt-F2) and start the voice control there, afterwards the system is ready to use.
+## Usage
+After everything is set up, execute the start script.
 ```shell
 ./start.sh
 ```
-
-
-## Usage
-After everything is set up, the LED/lamp should turn on when saying `lumos` and off when saying `nox`.
+Wait five seconds, afterwards the LED/lamp should turn on when saying `lumos` and off when saying `nox`.
 
 
 ## License
