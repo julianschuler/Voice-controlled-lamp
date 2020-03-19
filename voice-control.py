@@ -14,10 +14,12 @@ client = pyjulius.Client('localhost', 10500)
 try:
 	print "Starting julius..."
 	FNULL = open(os.devnull, 'w')
-	subprocess.Popen(["julius/julius/julius", "-C", "settings.jconf", "-dnnconf", "dnn.jconf"], stdout=FNULL, stderr=FNULL)
+	proc = subprocess.Popen(["julius/julius/julius", "-C", "settings.jconf", "-dnnconf", "dnn.jconf"], stdout=FNULL, stderr=FNULL)
 except:
-	Stopped
-	sys.exit();
+	print "Error during startup."
+	proc.kill()
+	sys.exit(1)
+	
 print "Done."
 
 while 1:
@@ -31,7 +33,9 @@ while 1:
 			time.sleep(1)
 		except KeyboardInterrupt:
 			print "Stopped."
+			proc.kill()
 			sys.exit(1)
+		
 
 # main loop
 client.start()
@@ -48,12 +52,12 @@ try:
 					try:
 						urllib2.urlopen("http://lumen.local/?state=on")
 					except:
-						pass
+						print "Error: lumen.local is unreachable, check your network connection."
 				elif str(result) == "nox":
 					try:
 						urllib2.urlopen("http://lumen.local/?state=off")
 					except:
-						pass
+						print "Error: lumen.local is unreachable, check your network connection."
 			else:
 				print "Discarded.\tScore: %.2f" % (result.score)
 
@@ -65,3 +69,4 @@ finally:
 	client.stop()
 	client.join()
 	client.disconnect()
+	proc.kill()
